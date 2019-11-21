@@ -107,6 +107,26 @@ function correctAnswer() {
     });
     resetRound();
 }
+// check if the user choice is wrong
+function incorrectAnswer() {
+    incorrectAnswers++; 
+        $('.timeRemaining').text('YOU HAVE ANSWERED INCORRECTLY!').css({
+            'color': '#3D414F'
+        });
+        resetRound();
+    }
+
+// function for an unanswered question
+function unAnswered() {
+    unansweredQuestions++;
+    $('.timeRemaining').text("YOU FAILED TO CHOOSE AN OPTION").css({
+        'color': '#3D414F'
+    });
+    resetRound();
+}
+
+}
+
 
 
     }
