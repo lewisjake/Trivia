@@ -125,11 +125,32 @@ function unAnswered() {
     resetRound();
 }
 
+function resetRound() {
+    $('.answersAll').remove();
+        $('.answers').append('<img class=answerImage width="150" height="150" src="' + triviaGame[indexQandA].image + ' ">'); // adds answer image
+        indexQandA++; // increments index which will load next question when loadQandA() is called again
+        if (indexQandA < triviaGame.length) {
+            setTimeout(function() {
+                loadQandA();
+                $('.answerImage').remove();
+            }, 5000);
+        } else {
+            setTimeout(function () {
+                $('.question').remove();
+                $('.timeRemaining').remove();
+                $('.answerImage').remove();
+                $('.answers').append('<h4 class= answersAll end>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
+                $('.answers').append('<h4 class= answersAll end>INCORRECT ANSWERS: ' + incorrectAnswers + '</h4>');
+                $('.answers').append('<h4 class= answersAll end>UNANSWERED QUESTIONS: ' + unansweredQuestions + '</h4>');
+                setTimeout(function () {
+                    location.reload();
+        }, 7000);
+    }, 5000);
 }
 
 
 
-    }
+    };
 
 
 
