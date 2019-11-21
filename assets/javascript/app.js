@@ -66,6 +66,21 @@ $(document).ready(function() {
         correct = triviaGame[QandA].correct;
         var question = triviaGame[QandA].question;
         $('.question').html(question);
+        for (var i = 0; i < 4; i++) {
+            var answer = triviaGame[QandA].answer[i];
+            $(".answers").append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
+        }
+
+        $("h4").click(function () {
+            var id = $(this).attr('id');
+            if (id === correct) {
+                answered = true; // stops the timer
+                $('.question').text("THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
+                correctAnswer();
+            } else {
+                answered = true; //stops the timer
+                $('.question').text("YOU CHOSE: " + triviaGame[indexQandA].answer[id] + ".....HOWEVER THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
+                incorrectAnswer();
     }
 
 
