@@ -7,7 +7,7 @@ $(document).ready(function() {
     var unansweredQuestions = 0;
     var timeRemaining = 15;
     var intervalId;
-    var QandA = 0; // allows another question to load with the game restarting
+    var indexQandA = 0; // allows another question to load with the game restarting
     var answered = false; // stop timer if user clicks an answer
     var triviaGame = [{
             question: "How many games are played in a regular season of Baseball?",
@@ -49,26 +49,26 @@ $(document).ready(function() {
     // functions to run the game
     function startGame() {
         console.log("Start!");
-        $('start-button').remove();
+        $('.start-button').remove();
         correctAnswers = 0;
         incorrectAnswers = 0;
         unansweredQuestions = 0;
-        QandA();
+        loadQandA();
     }
 
-    function QandA() {
+    function loadQandA() {
         answered = false; // allows time to be pushed after each round
         timeRemaining = 15;
-        intervalId = setInterval(timer, 1000);
+        intervalID = setInterval(timer, 1000);
         if (answered === false) {
             timer();
         }
-        correct = triviaGame[QandA].correct;
-        var question = triviaGame[QandA].question;
+        correct = triviaGame[indexQandA].correct;
+        var question = triviaGame[indexQandA].question;
         $('.question').html(question);
         for (var i = 0; i < 4; i++) {
-            var answer = triviaGame[QandA].answer[i];
-            $(".answers").append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
+            var answer = triviaGame[indexQandA].answer[i];
+            $('.answers').append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
         }
 
         $("h4").click(function () {
@@ -81,6 +81,34 @@ $(document).ready(function() {
                 answered = true; //stops the timer
                 $('.question').text("YOU CHOSE: " + triviaGame[indexQandA].answer[id] + ".....HOWEVER THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
                 incorrectAnswer();
+            }
+        });
+    }
+
+    function timer() {
+        if (timeRemaining === 0) {
+            answered = true;
+            clearInterval(intervalID);
+            $('.question').text("THE CORRECT ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
+            unAnswered();
+        } else if (answered === true) {
+            clearInterval(intervalID);
+        } else {
+            timeRemaining--;
+            $('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE');
+        }
+
+}
+// check for correct answer
+function correctAnswer() {
+    correctAnswers++;
+    $('.timeRemaining').text("YOU HAVE ANSWERED CORRECTLY!").css({
+        'color': '#3D414F'
+    });
+    resetRound();
+}
+
+
     }
 
 
