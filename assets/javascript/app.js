@@ -44,8 +44,30 @@ $(document).ready(function() {
             answer: ["Buck Hunter", "Guitar Hero", "Dance Dance Revolution", "Call of Duty"],
             correct: "1",
             image: ("assets/images/guitar.jpg") 
-        }
-    
-    }];
+        }];
 
-}
+    // functions to run the game
+    function startGame() {
+        console.log("Start!");
+        $('start-button').remove();
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        unansweredQuestions = 0;
+        QandA();
+    }
+
+    function QandA() {
+        answered = false; // allows time to be pushed after each round
+        timeRemaining = 15;
+        intervalId = setInterval(timer, 1000);
+        if (answered === false) {
+            timer();
+        }
+        correct = triviaGame[QandA].correct;
+        var question = triviaGame[QandA].question;
+        $('.question').html(question);
+    }
+
+
+
+});
