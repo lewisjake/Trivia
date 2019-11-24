@@ -9,6 +9,7 @@ $(document).ready(function() {
     var intervalId;
     var indexQandA = 0; // allows another question to load with the game restarting
     var answered = false; // stop timer if user clicks an answer
+    var correct;
     var triviaGame = [{
             question: "How many games are played in a regular season of Baseball?",
             answer: [110, 150, 100, 162],
@@ -35,7 +36,7 @@ $(document).ready(function() {
             correct: "0",
             image: ("assets/images/cycle.jpg")
         }, {
-            question: "In 1970, pitch Doc Ellis claimed to have thrown a no-hitter while under the influence of what drug?",
+            question: "In 1970, pitcher Doc Ellis claimed to have thrown a no-hitter while under the influence of what drug?",
             answer: ["LSD", "Cocaine", "Codine", "Marijuana"],
             correct: "0",
             image: ("assets/images/doc.jpg")
@@ -48,17 +49,19 @@ $(document).ready(function() {
 
     // functions to run the game
     function startGame() {
-        console.log("Start!");
-        $('.start-button').remove();
+        console.log("Started!");
+        // $('.start-button').remove();
         correctAnswers = 0;
         incorrectAnswers = 0;
         unansweredQuestions = 0;
         loadQandA();
+        $('.start-button').remove();
+
     }
 
     function loadQandA() {
         answered = false; // allows time to be pushed after each round
-        timeRemaining = 15;
+        timeRemaining = 16;
         intervalID = setInterval(timer, 1000);
         if (answered === false) {
             timer();
@@ -148,10 +151,12 @@ function resetRound() {
     }, 5000);
 }
 
-
-
-    };
-
-
+};
+// button to restart the app
+$('.startButton').on("click", function () {
+    $('.startButton');
+    startGame();
+    
+    });
 
 });
